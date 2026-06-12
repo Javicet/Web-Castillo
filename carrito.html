@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Carrito | Mueblería</title>
+    <link rel="stylesheet" href="styleM.css">
+    <link rel="stylesheet" href="carrito.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+
+</head>
+<body style="padding: 50px; background-color: #111; color: #e8e4dd;">
+
+    <div class="carrito-contenedor">
+        <h2>Tu Carrito</h2>
+        <div id="lista-carrito" style="max-height: 400px; overflow-y: auto; border: 1px solid #333; padding: 10px; margin-top: 20px;">
+            </div>
+        
+        <div class="resumen-pago" style="margin-top: 20px;">
+            <p><strong>Total: <span id="total">$0.00</span></strong></p>
+        </div>
+        
+        <a href="indexM.html" style="color: #4ecdc4; display: block; margin-top: 20px;">Seguir comprando</a>
+    </div>
+
+    <script>
+    // 1. Leemos el carrito del localStorage
+    let lista = JSON.parse(localStorage.getItem('carrito')) || [];
+    const contenedor = document.getElementById('lista-carrito');
+
+    // 2. Función para eliminar producto
+    function eliminarProducto(index) {
+        lista.splice(index, 1); 
+        localStorage.setItem('carrito', JSON.stringify(lista)); 
+        location.reload(); 
+    }
+
+    // 3. Renderizamos la lista
+    if (lista.length === 0) {
+        contenedor.innerHTML = "<p>Tu carrito está vacío.</p>";
+    } else {
+        let total = 0; 
+        
+        lista.forEach((item, index) => {
+            let precioLimpio = parseFloat(item.precio.replace(/[^0-9.-]+/g,""));
+            total += precioLimpio * item.cantidad;
+            
+            let fila = document.createElement('div');
+            fila.style.display = "flex";
+            fila.style.justifyContent = "space-between";
+            fila.style.marginBottom = "10px";
+            fila.style.borderBottom = "1px solid #333";
+            fila.style.padding = "10px 0";
+            
+           fila.innerHTML = `
+                <span>${item.nombre} — <strong>Cant: ${item.cantidad}</strong> — ${item.precio}</span>
+                <button onclick="eliminarProducto(${index})" class="btn-eliminar">X</button>
+            `;
+            contenedor.appendChild(fila);
+        });
+
+        // 4. Actualizamos el total al final
+        document.getElementById('total').textContent = "$" + total.toFixed(2);
+    }
+   
+</script>
+</body>
+</html>

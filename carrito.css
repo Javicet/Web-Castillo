@@ -1,0 +1,64 @@
+/* ── Estilos específicos para el Carrito ── */
+
+.carrito-contenedor {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--bg-card); /* Usamos el color de fondo de tus tarjetas */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border: 1px solid var(--border);
+}
+
+.carrito-contenedor h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--text);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+
+#lista-carrito {
+    background-color: #111; /* Un tono un poco más oscuro para separar la lista */
+    border-radius: 5px;
+    padding: 15px;
+}
+
+/* Estilo para cada fila del producto */
+#lista-carrito div {
+    padding: 15px 0 !important;
+    transition: background 0.3s;
+}
+
+#lista-carrito div:hover {
+    background-color: rgba(255,255,255,0.03);
+}
+
+/* El botón de eliminar (La X) */
+.btn-eliminar {
+    background: transparent !important;
+    border: 1px solid #ff4d4d !important;
+    color: #ff4d4d !important;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-eliminar:hover {
+    background: #ff4d4d !important;
+    color: white !important;
+}
+
+/* Estilo del total */
+.resumen-pago {
+    font-size: 1.5rem;
+    text-align: right;
+    color: var(--text);
+    border-top: 2px solid var(--border);
+    padding-top: 15px;
+}
+
+.resumen-pago span {
+    color: var(--accent);
+}
